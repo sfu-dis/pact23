@@ -17,9 +17,9 @@ ODIR          := ./obj$(BITS)
 output_folder := $(shell mkdir -p $(ODIR))
 
 # Configure the compiler
-CXX      = clang++-15
+CXX      = clang++
 CXXFLAGS  = -mrtm -MMD -O3 -m$(BITS) -ggdb -std=c++20 -Wall -Werror -fPIC \
-            -march=native -Wextra -emit-llvm
+            -march=native -Wextra -c
 
 # Configure Makefile targets
 .DEFAULT_GOAL = all

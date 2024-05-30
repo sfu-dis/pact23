@@ -28,8 +28,12 @@ void tm_plugin::instrument_bb(BasicBlock *bb,
         // If transform_callsite returns an instruction, then we should
         // use that instruction instead of the one we had
         if (Instruction *new_inst = transform_callsite(callsite, inst)) {
-          ReplaceInstWithValue(bb->getInstList(), inst, new_inst);
-          inst = BasicBlock::iterator(new_inst); // update iterator
+          // This block is changed by mohamed at May 27 to port 
+	  // the plugin to llvm 16
+	  // As specified in the doc of llvm this fuction updates 
+	  // the instruction iterator, so I commented the last line.
+	  ReplaceInstWithInst(bb, inst, new_inst);
+          // inst = BasicBlock::iterator(new_inst); // update iterator
         }
       }
     }
